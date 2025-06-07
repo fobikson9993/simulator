@@ -1,0 +1,13 @@
+Kod M	Opis
+M00	Zatrzymanie programu
+M01	Zatrzymanie warunkowe
+M02	Koniec programu
+M03	Wrzeciono w prawo (zgodnie z ruchem wskazówek zegara)
+M04	Wrzeciono w lewo (przeciwnie do ruchu wskazówek zegara)
+M05	Zatrzymanie wrzeciona
+M06	Zmiana narzędzia
+M08	Włączenie chłodziwa
+M09	Wyłączenie chłodziwa
+M30	Koniec programu i reset
+M98	Wywołanie podprogramu
+M99	Powrót z podprogramu
