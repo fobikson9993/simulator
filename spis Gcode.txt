@@ -1,0 +1,90 @@
+🔹 Parametry wejściowe:
+X_1, Z_1: punkt startowy
+
+X_2, 
+
+X_3 Z_2: punkt końcowy
+zasada  X_1 -> X_2 -> X_3
+           Z_1     Z2
+n: obroty
+
+f: posuw
+
+ap: głębokość skrawania
+
+🔁 Logika:
+Ustaw G54 / bazę
+
+Szybki najazd do punktu bezpiecznego (X_start + 2*ap, Z_start)
+
+Uruchom wrzeciono (M03, S=n)
+
+Zjazd do X_1 i Z_1
+
+G1 do Z_1 (toczenie)
+
+Odjazd w górę (np. X+=1 mm)
+
+Powtarzaj, aż osiągniesz X_2 
+i jeśli użytkownik poda X3 i X2 wykonujesz analogicznie to samo tylko nie X1->X2 a X2->X3
+
+Zatrzymanie wrzeciona (M05), wyjazd na bezpieczną pozycję
+X_1 50  X_2 40 X_30 Z_1 -20 Z_2 -10
+🧾 Kod (szablon):
+gcode
+Kopiuj
+Edytuj
+G54
+G0 X60 Z2
+S1200 M03
+cykl I X1-> X2 Z1
+G1 X50 F0.2
+G1 Z-20
+G0 X51
+G0 Z2
+(logika X1-X2/ap =  ilość cykli 
+cykl I X2-> X3 Z2
+G1 X40 F0.2
+G1 Z-10
+G0 X41
+G0 Z2
+(X_2-X_3/ap)
+M05
+
+
+------------
+🔧 3. Planowanie czoła (Facing)
+🔹 Parametry wejściowe:
+X_start: średnica detalu
+
+X_end: środek (zwykle X=0)
+
+Z_plane: czoło detalu (zwykle Z=0)
+
+f, n, ap
+
+🔁 Logika:
+G0 do punktu powyżej materiału (X_start(odsunięcie się  opcjonalnie od 0.5 do 3), Z=2)
+
+Włączenie wrzeciona
+
+Zjazd do Z=Z_plane
+
+Toczenie od X_start do X_end (G1)
+
+Wycofanie w Z+, odjazd X
+
+Powtarzaj do uzyskania płaszczyzny
+
+🧾 Kod:
+gcode
+Kopiuj
+Edytuj
+G54
+G0 X100 Z2
+S1000 M03
+G1 Z0 F0.15
+G1 X0
+G0 Z2
+G0 X100
+M05
